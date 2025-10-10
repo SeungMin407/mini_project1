@@ -8,7 +8,8 @@ from api.openai_api import get_image_description
 from utils.file_handler import get_image_file, encode_image_to_base64
 from utils.config import DB_PATH
 import sqlite3
-
+import pandas as pd
+import os
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -99,5 +100,35 @@ class MainWindow(QMainWindow):
                 INSERT INTO image_logs (image, prompt, response) VALUES (?, ?, ?)
             ''', (image_blob, prompt, result))
             conn.commit()
+        # --- CSV 누적 저장 ---
+        try:
+            csv_path = "book_descriptions.csv"  # 모든 기록을 한 파일에 누적
 
+            # GPT 결과를 딕셔너리로 변환
+            data_dict = {}
+            for line in result.splitlines():
+                if ":" in line:
+                    key, value = line.split(":", 1)
+                    data_dict[key.strip()] = value.strip()
 
+            # DataFrame 생성 (1행)
+            df_new = pd.DataFrame([{
+                "Title": data_dict.get("Title", ""),
+                "Author": data_dict.get("Author", ""),
+                "Publisher": data_dict.get("Publisher", ""),
+                "Genre": data_dict.get("Genre", ""),
+                "Rating": data_dict.get("Rating", "")
+            }])
+
+            # CSV가 이미 존재하면 이어쓰기
+            if os.path.exists(csv_path):
+                df_existing = pd.read_csv(csv_path)
+                df_combined = pd.concat([df_existing, df_new], ignore_index=True)
+            else:
+                df_combined = df_new
+
+            # CSV 저장
+            df_combined.to_csv(csv_path, index=False, encoding="utf-8-sig")
+
+        except Exception as e:
+            pass
