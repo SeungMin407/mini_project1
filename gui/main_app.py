@@ -12,7 +12,7 @@ import sqlite3
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("OpenAI 이미지 설명 프로그램")
+        self.setWindowTitle("책 표지 분류기")
         self.setGeometry(100, 100, 700, 500)
         self.image_path = None
         self.init_ui()
@@ -27,13 +27,14 @@ class MainWindow(QMainWindow):
         self.load_button = QPushButton("이미지 열기")
         self.load_button.clicked.connect(self.load_image)
 
-        self.text_input = QTextEdit()
-        self.text_input.setPlaceholderText("GPT에게 보낼 추가 프롬프트 입력")
+        #self.text_input = QTextEdit()
+        #self.text_input.setPlaceholderText("GPT에게 보낼 추가 프롬프트 입력")
+        self.fixed_prompt = "Search the internet for this book's cover and display its title, author, publisher, genre, and rating. Please answer in Korean in the following format: Title : \nAuthor : \nPublisher : \nGenre : \nRating : , without any additional information."
 
         self.result_output = QTextEdit()
         self.result_output.setReadOnly(True)
 
-        self.generate_button = QPushButton("GPT 설명 생성")
+        self.generate_button = QPushButton("책 정보 보기")
         self.generate_button.clicked.connect(self.generate_description)
 
         top_layout = QHBoxLayout()
@@ -42,7 +43,7 @@ class MainWindow(QMainWindow):
 
         layout = QVBoxLayout()
         layout.addLayout(top_layout)
-        layout.addWidget(self.text_input)
+        #layout.addWidget(self.text_input)
         layout.addWidget(self.generate_button)
         layout.addWidget(self.result_output)
 
@@ -83,7 +84,7 @@ class MainWindow(QMainWindow):
             self.result_output.setPlainText("이미지를 먼저 불러와 주세요.")
             return
         
-        prompt = self.text_input.toPlainText()
+        prompt = self.fixed_prompt#self.text_input.toPlainText()
 
 
         base64_image = encode_image_to_base64(self.image_path)
@@ -98,4 +99,5 @@ class MainWindow(QMainWindow):
                 INSERT INTO image_logs (image, prompt, response) VALUES (?, ?, ?)
             ''', (image_blob, prompt, result))
             conn.commit()
+
 
