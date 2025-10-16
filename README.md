@@ -85,3 +85,16 @@ project/
 
 - 결과를 CSV/Excel로 export → 개인 독서 기록 관리, 도서 목록 공유, 통계 프로그램 연동 가능
 - 분류 레이블 기반 통계 대시보드 → 장르별 책 수, 최근 읽은 책 트렌드, 출판사별 비율, 표지 색상/분위기 통계 등 시각화 가능
+
+---
+## ■ 구현
+
+<img width="699" height="533" alt="image" src="https://github.com/user-attachments/assets/4fa9a157-e3c4-4faf-84a2-833c77f8dd7a" />
+
+- 고정된 형식의 결과 값을 얻기 위해 프롬포트 입력 부분 삭제 후 고정된 프롬포트 입력
+- 검색되지 않는(정보가 없는) 정보는 None으로 표시
+- 검색 결과 db 및 csv파일에 저장
+- 추후 csv파일에서 데이터 분류 및 삭제 기능 추가 가능
+
+<img width="465" height="135" alt="image" src="https://github.com/user-attachments/assets/b428a8a2-03b3-4aa0-bd53-a4048a24afc3" />
+
