@@ -30,7 +30,7 @@ class MainWindow(QMainWindow):
 
         #self.text_input = QTextEdit()
         #self.text_input.setPlaceholderText("GPT에게 보낼 추가 프롬프트 입력")
-        self.fixed_prompt = "Search the internet for this book's cover and display its title, author, publisher, genre, and rating. Please answer in Korean in the following format: Title : \nAuthor : \nPublisher : \nGenre : \nRating : , without any additional information."
+        self.fixed_prompt = "Check on the internet whether this item is a book. If it is, output in Korean exactly in the format: Title : <value>\nAuthor : <value>\nPublisher : <value>\nGenre : <value>\nRating : <value>\nIf not a book, output only None. No extra text or explanation."
 
         self.result_output = QTextEdit()
         self.result_output.setReadOnly(True)
@@ -131,4 +131,4 @@ class MainWindow(QMainWindow):
             df_combined.to_csv(csv_path, index=False, encoding="utf-8-sig")
 
         except Exception as e:
-            pass
+            print(e)
