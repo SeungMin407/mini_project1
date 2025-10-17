@@ -94,7 +94,11 @@ project/
 - 고정된 형식의 결과 값을 얻기 위해 프롬포트 입력 부분 삭제 후 고정된 프롬포트 입력
 - 검색되지 않는(정보가 없는) 정보는 None으로 표시
 - 검색 결과 db 및 csv파일에 저장
-- 추후 csv파일에서 데이터 분류 및 삭제 기능 추가 가능
 
 <img width="465" height="135" alt="image" src="https://github.com/user-attachments/assets/b428a8a2-03b3-4aa0-bd53-a4048a24afc3" />
+
+## ■ 확장
+
+- 추후 csv파일에서 데이터 분류 및 삭제 기능 추가
+- db의 검색기록을 바탕으로 사용자의 취향에 맞는 책을 추천하는 버튼 추가
 
