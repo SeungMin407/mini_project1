@@ -97,7 +97,7 @@ project/
 
 <img width="465" height="135" alt="image" src="https://github.com/user-attachments/assets/b428a8a2-03b3-4aa0-bd53-a4048a24afc3" />
 
-## ■ 확장
+## ■ 미구현
 
 - 추후 csv파일에서 데이터 분류 및 삭제 기능 추가
 - db의 검색기록을 바탕으로 사용자의 취향에 맞는 책을 추천하는 버튼 추가
